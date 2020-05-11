@@ -5,7 +5,7 @@ using namespace std;
 class Bed
 {
 public:
-    Bed() : m_second(0){} //
+    Bed() : bedWeight(200.2),m_second(0){} //
     Bed(double weight, int second) : bedWeight(weight), m_second(second){}
 
     void Sleep(int second)
