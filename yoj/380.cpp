@@ -30,7 +30,15 @@ protected:
     string tel;
 };
 
-____qcodep____//定义类
+//____qcodep____//定义类
+class Teacher_Cadre: public Teacher, public Cadre{
+public :
+    void show();
+    Teacher_Cadre(string nam,int a,char s,string title,string p,string ad,string t,double wage);
+private:
+    double wage;
+};
+//
 Teacher::Teacher(string nam,int a,char s,string tit,string ad,string t)
 {
     name=nam;
@@ -51,7 +59,9 @@ Cadre::Cadre(string nam,int a,char s,string p,string ad,string t)
     tel=t;
 }
 
-____qcodep____//构造函数
+//____qcodep____//构造函数
+Teacher_Cadre::Teacher_Cadre(string nam,int a,char s,string title,string p,string ad,string t,double wage):Teacher(nam,a,s,title,ad,t),Cadre(nam,a,s,p,ad,t),wage(wage){}
+//
 void Teacher::display()
 {
     cout<<"name:"<<name<<endl;

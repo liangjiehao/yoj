@@ -36,8 +36,32 @@ private:
     BirthDate birthday;
 };
 
-____qcodep____//需要实现多个函数，函数已在类内定义
+//____qcodep____//需要实现多个函数，函数已在类内定义
+BirthDate::BirthDate(int y ,int m,int d):year(y),month(m),day(d){}
+void BirthDate::display(){
+    cout<<"birthday:"<<year<<'/'<<month<<'/'<<day<<endl;
+}
+void BirthDate::setbirthday(int y,int m ,int d){
+    year=y;
+    month=m;
+    day=d;
+}
+Teacher::Teacher(int num,string name,char sex):num(num),name(name),sex(sex){}
+void Teacher::display(){
+    cout<<"num:"<<num<<endl;
+    cout<<"name:"<<name<<endl;
+    cout<<"sex:"<<sex<<endl;
+}
+Professor::Professor(int num,string name,char sex,BirthDate birthday):Teacher(num,name,sex),birthday(birthday){}
+void Professor::display(){
+    Teacher::display();
+    birthday.display();
+}
+void Professor::setbirthday(int y,int m,int d){
+    birthday.setbirthday(y,m,d);
+}
 
+//
 int main()
 {
     int num;
