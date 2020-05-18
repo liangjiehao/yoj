@@ -23,7 +23,7 @@ public:
         if (verify()){
             return getlen(_vertices[0],_vertices[2])*getlen(_vertices[1],_vertices[3])
                     *sqrt(1-getang(_vertices[0],_vertices[2],_vertices[1],_vertices[3])
-                    *getang(_vertices[0],_vertices[2],_vertices[1],_vertices[2]))*0.5;
+                    *getang(_vertices[0],_vertices[2],_vertices[1],_vertices[3]))*0.5;
         }
         else return 0;
         
@@ -37,10 +37,12 @@ public:
     };
     bool verify(){
         return {
-        abs(getang(_vertices[0],_vertices[1],_vertices[2],_vertices[1]))-1 >=0.000001 && 
-        abs(getang(_vertices[0],_vertices[1],_vertices[3],_vertices[1]))-1 >=0.000001 && 
-        abs(getang(_vertices[1],_vertices[2],_vertices[3],_vertices[2]))-1 >=0.000001 &&
-        abs(getang(_vertices[0],_vertices[2],_vertices[3],_vertices[2]))-1 >=0.000001
+        1-abs(getang(_vertices[0],_vertices[1],_vertices[2],_vertices[1])) >=0.000001 && 
+        1-abs(getang(_vertices[0],_vertices[1],_vertices[3],_vertices[1])) >=0.000001 && 
+        1-abs(getang(_vertices[1],_vertices[2],_vertices[3],_vertices[2])) >=0.000001 &&
+        1-abs(getang(_vertices[0],_vertices[2],_vertices[3],_vertices[2])) >=0.000001 &&
+        getlen(_vertices[0],_vertices[1])+getlen(_vertices[2],_vertices[3]) < 
+        getlen(_vertices[0],_vertices[2])+getlen(_vertices[1],_vertices[3])
         };
     };
     double getlen(Point a,Point b){
@@ -57,10 +59,9 @@ class Parallelogram:public Quadrilateral{
 public:
     Parallelogram(vector<Point>vertice):Quadrilateral(vertice){}
     bool verify(){
-        return Quadrilateral::verify() && (
-            (Quadrilateral::getang(_vertices[0],_vertices[1],_vertices[2],_vertices[1])
-            +Quadrilateral::getang(_vertices[1],_vertices[2],_vertices[3],_vertices[2]))<=0.000001
-        );
+        return Quadrilateral::verify() && 
+            1-Quadrilateral::getang(_vertices[0],_vertices[1],_vertices[3],_vertices[2])<=0.000001
+            && 1-Quadrilateral::getang(_vertices[1],_vertices[2],_vertices[0],_vertices[3])<=0.000001;
     }
     double getArea(){
         if (verify()){
@@ -74,24 +75,12 @@ public:
         }
         else return 0;
     }
-    /*
-    double getArea(){
-        return abs(Quadrilateral::getlen(_vertices[0],_vertices[1])
-                *Quadrilateral::getlen(_vertices[1],_vertices[2])
-                *sqrt(1-Quadrilateral::getang(_vertices[0],_vertices[1],_vertices[2])
-                *Quadrilateral::getang(_vertices[0],_vertices[1],_vertices[2])));
-    };
-    double getPerimeter(){
-        return 2*Quadrilateral::getlen(_vertices[0],_vertices[1])
-                +2*Quadrilateral::getlen(_vertices[1],_vertices[2]);
-    };*/
-
 };
 class Rectangle:public Parallelogram{
 public:
     Rectangle(vector<Point>vertice):Parallelogram(vertice){}
     bool verify(){
-        return Parallelogram::verify() && Quadrilateral::getang(_vertices[0],_vertices[1],_vertices[2],_vertices[1])<=0.000001;
+        return Parallelogram::verify() && abs(Quadrilateral::getang(_vertices[0],_vertices[1],_vertices[2],_vertices[1]))<=0.000001;
     }
     double getArea(){
         if (verify()){
