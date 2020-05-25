@@ -65,16 +65,16 @@ void dfs(int n,char step){
     void mid();
     void _left();
     void _right();
-
     if(flag || n==10)return;
-
     if (l==0 && r==pow(2,7)-1){
         cout<<n<<endl;
+        f[n]=step;
         flag=true;
         return;
     }
     
     f[n]=step;
+
     left();
     dfs(n+1,'a');
     _left();
