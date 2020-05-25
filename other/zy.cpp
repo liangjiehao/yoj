@@ -12,7 +12,7 @@ int main(){
     //dfs(0,'b');
     //dfs(0,'c');
     for (int i=1;i<=9;i++)cout<<f[i]<<' ';
-
+    cout<<endl<<f+1;
     return 0;
 }
 int pow(int x, int y){
