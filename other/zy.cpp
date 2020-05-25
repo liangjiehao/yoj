@@ -9,10 +9,7 @@ int main(){
     l=read();
     r=read();
     dfs(0,'0');
-    //dfs(0,'b');
-    //dfs(0,'c');
-    for (int i=1;i<=9;i++)cout<<f[i]<<' ';
-    cout<<endl<<f+1;
+    cout<<f+1;
     return 0;
 }
 int pow(int x, int y){
@@ -29,14 +26,7 @@ int read(){
     return b;
 }
 void left(){
-    /*
-    int pow(int,int);
-    int t=1&l;
-    int t1=l>>1;
-    int t3=pow(2,6);
-    int t4=t1+t3*t;*/
     l=((l>>1)+(1&l)*pow(2,6));
-    //l=(l>>1+(1&l)*pow(2,6));
 }
 void right(){
     int pow(int,int);
@@ -66,7 +56,6 @@ void mid(){
     t1=t1^t2;
     t2=t1^t2;
     t1=t1^t2;
-    //int t=(~t0)&l;
     l=((~t0)&l)+t1;
     r=((~t0)&r)+t2;
 }
@@ -80,31 +69,21 @@ void dfs(int n,char step){
     if(flag || n==10)return;
 
     if (l==0 && r==pow(2,7)-1){
-    //if (l==60 && r==22){
         cout<<n<<endl;
         flag=true;
         return;
     }
     
     f[n]=step;
-    //int t1=l,t2=r;
     left();
     dfs(n+1,'a');
     _left();
-    //l=t1;
-    //r=t2;
 
-    //t1=l;t2=r;
     mid();
     dfs(n+1,'b');
     mid();
-    //l=t1;
-    //r=t2;
 
-    //t1=l;t2=r;
     right();
     dfs(n+1,'c');
     _right();
-    //l=t1;
-    //r=t2;
 }
