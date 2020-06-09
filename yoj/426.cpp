@@ -52,29 +52,7 @@ Rectangle Rectangle::operator+(const Rectangle & r2){
     y1=getRT().getY() >= r2.getRT().getY() ? getRT().getY() : r2.getRT().getY();
     x2=getLB().getX() <= r2.getLB().getX() ? getLB().getX() : r2.getLB().getX();
     y2=getLB().getY() <= r2.getLB().getY() ? getLB().getY() : r2.getLB().getY();
-    
-    if (getLB().getY() <= r2.getLB().getY()){
-        y2=getLB().getY();
-    }
-    else y2= r2.getLB().getY();
-
-    if (getLB().getX() <= r2.getLB().getX()){
-        x2=getLB().getX();
-    }
-    else x2= r2.getLB().getX();
-
-    if (getRT().getY() >= r2.getRT().getY()){
-        y1=getRT().getY();
-    }
-    else y1= r2.getRT().getY();
-
-    if (getRT().getX() >= r2.getRT().getX()){
-        x1=getRT().getX();
-    }
-    else x1= r2.getRT().getX();
-    Point a(x2,y2),b(x1,y1);
-    return Rectangle(a,b);
-
+    return Rectangle(Point (x2,y2),Point (x1,y1));
 }
 
 //
